@@ -1,6 +1,97 @@
-import '@/styles/globals.css'
-import type { AppProps } from 'next/app'
+import GlobalStyle from "styles/GlobalStyle";
+import { useState, useEffect } from "react";
+import type { AppProps } from "next/app";
+import { Session } from "next-auth";
+import { SessionProvider } from "next-auth/react";
+import { RecoilRoot } from "recoil";
+import { useRouter, Router } from "next/router";
+import Loading from "components/loading/index";
+// import * as gtag from "lib/gtag";
+import Head from "next/head";
+import Header from "components/header";
+import Footer from "components/footer";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import Script from "next/script";
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
+// export default function App({ Component, pageProps, session }: AppProps) {
+export default function App({
+  Component,
+  pageProps,
+}: AppProps<{ session: Session }>) {
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    AOS.init();
+  }, []);
+  useEffect(() => {
+    const start = () => {
+      // NProgress.start();
+      setLoading(true);
+    };
+    const end = () => {
+      // NProgress.done();
+      setLoading(false);
+    };
 
-export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+    Router.events.on("routeChangeStart", start);
+    Router.events.on("routeChangeComplete", end);
+    Router.events.on("routeChangeError", end);
+
+    return () => {
+      Router.events.off("routeChangeStart", start);
+      Router.events.off("routeChangeComplete", end);
+      Router.events.off("routeChangeError", end);
+    };
+  }, []);
+  // // GA 설정 시작
+  // const router = useRouter();
+  // useEffect(() => {
+  //   const handleRouteChange = (url: any) => {
+  //     gtag.pageview(url);
+  //   };
+  //   router.events.on("routeChangeComplete", handleRouteChange);
+  //   router.events.on("hashChangeComplete", handleRouteChange);
+  //   return () => {
+  //     router.events.off("routeChangeComplete", handleRouteChange);
+  //     router.events.off("hashChangeComplete", handleRouteChange);
+  //   };
+  // }, [router.events]);
+  // // GA 설정 끝
+  return (
+    <SessionProvider session={pageProps.session}>
+      <RecoilRoot>
+        <GlobalStyle>
+          <Head>
+            <title>원클린</title>
+          </Head>
+          <Header></Header>
+          {/* GA 설정 시작 */}
+          {/* Global Site Tag (gtag.js) - Google Analytics */}
+          {/* <Script
+              strategy="afterInteractive"
+              src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`}
+            />
+            <Script
+              id="gtag-init"
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={{
+                __html: `
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '${gtag.GA_TRACKING_ID}', {
+          page_path: window.location.pathname,
+        });
+      `,
+              }}
+            /> */}
+          {/* GA 설정 끝 */}
+          {loading ? <Loading /> : <Component {...pageProps} />}
+          <Footer></Footer>
+          {/* <Loading /> */}
+        </GlobalStyle>
+      </RecoilRoot>
+    </SessionProvider>
+  );
 }
