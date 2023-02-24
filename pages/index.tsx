@@ -238,7 +238,7 @@ export default function Home() {
                 <span>4 /</span> 서비스 사용료 입금
               </li>
               <li data-aos="fade" data-aos-delay="500">
-                <span>4 /</span> <b>"서비스 예약 확정"</b> 메시지 수령
+                <span>5 /</span> <b>"서비스 예약 확정"</b> 메시지 수령
               </li>
             </ul>
           </S.Section3>

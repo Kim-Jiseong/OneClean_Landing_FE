@@ -42,26 +42,26 @@ export default class MyDocument extends Document {
             type="text/css"
           />
 
-          <meta
-            property="og:title"
-            content="원클린: 합리적인 가격에 누리는 화장실 청소"
-          />
+          <meta property="og:title" content="원클린" />
           <meta
             property="og:description"
-            content="원클린: 합리적인 가격에 누리는 화장실 청소"
+            content="합리적인 가격에 누리는 화장실 청소"
           />
-          {/* <meta
+          <meta property="og:type" content="website" />
+          <meta property="og:url" content="https://one-clean.kr" />
+          <meta
             property="og:image"
-            content=""
-          /> */}
-
+            content="https://oneclean-s3-bucket.s3.ap-northeast-2.amazonaws.com/assets/thumb.png"
+          />
+          <meta property="og:site_name" content="원클린" />
+          <meta property="og:locale" content="ko_KR" />
           <meta
             name="Keywords"
-            content="원클린: 합리적인 가격에 누리는 화장실 청소"
+            content="원클린: 합리적인 가격에 누리는 화장실 청소, 화장실, 청소, 1인가구, 자취"
           />
           <meta
             name="keywords"
-            content="원클린: 합리적인 가격에 누리는 화장실 청소"
+            content="원클린: 합리적인 가격에 누리는 화장실 청소, 화장실, 청소, 1인가구, 자취"
           />
           <meta
             name="Description"

@@ -10,9 +10,9 @@ function Footer() {
           <b>One</b>Clean
         </h3>
         <p>
-          주식회사 NYSE | 대표 : 이예원 <br />
+          버틀봇 | 사업자등록번호: 882-02-02063 <br />
           서울시 성북구 안암로 145 고려대학교 경영본관 2층 스타트업 스테이션
-          <br /> © NYSE Corp - All rights reserved
+          <br />
         </p>
       </S.Container>
     </>
